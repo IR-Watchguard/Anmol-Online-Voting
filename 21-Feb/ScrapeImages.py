@@ -20,19 +20,21 @@ def take_input():
 def fetch_images(url):
     '''Returns a list of source to the images'''
     tags = ['img', 'svg']
-    print(url)
+    print(f'Fetching all the images from {url}')
     res = requests.get(url)
-    soup = bs4.BeautifulSoup(res.text, 'lxml')
+    soup = bs4.BeautifulSoup(res.text, 'html.parser')
+    # print(soup)
     fetched_list = []
     for tag in tags:
-        page_img = soup.select(tag)
+        page_img = soup.find_all(tag)
+        # print(page_img)
         if page_img:
             fetched_list.extend(page_img)
 
     src_list = []
     for item in fetched_list:
         if item.get('src', False):
-            src_list.append(item['src'])ut
+            src_list.append(item['src'])
         else:
             src_list.append(item)
 
