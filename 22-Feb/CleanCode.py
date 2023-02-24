@@ -91,3 +91,4 @@ class PaymentProcessor():
         self.handlers = {}
 
     def register_handler(self, payment_type, handler):
+        self.handlers[payment_type] = handler
